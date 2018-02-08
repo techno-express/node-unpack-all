@@ -4,6 +4,7 @@
     // see http://unarchiver.c3.cx/commandline
     // unar and lsar
     var log = require('npmlog');
+    var path = require('path');
     var exec = require('child_process').exec;
     var os = require('os');
     
@@ -77,7 +78,7 @@
 
         // Unar command:
         var unar = options.unar;
-        if (!unar) unar = 'unar';
+        if (!unar) unar = (process.platform != "linux") ? path.join(__dirname,'unar') : 'unar';
         var ar = [unar];
 
         // Archive file (source):
@@ -175,7 +176,7 @@
 
         // Unar command:
         var lsar = options.lsar;
-        if (!lsar) lsar = 'lsar';
+        if (!lsar) lsar = (process.platform != "linux") ? path.join(__dirname,'lsar') : 'lsar';
         var ar = [lsar];
 
         // Archive file (source):
