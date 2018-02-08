@@ -32,7 +32,7 @@ if ((process.platform == "win32") || (process.platform == "darwin")) {
 
 function getExtractUnar(urlsource, filesource, destination){
     var node_wget = require('node-wget');
-    var unzip = require('unzip');
+    var unzip = require('unzipper');
     console.log('Downloading ' + urlsource);
   return new Promise(function (resolve, reject) {         
     node_wget({ url: urlsource, dest: filesource }, function (err) {
