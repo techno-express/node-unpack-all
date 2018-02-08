@@ -22,7 +22,7 @@
                 return '"' + s.replace(/(["\\$`!])/g, '\\$1') + '"';
             }
             else {
-                return String(s).replace(/([#!"$&'(),;<=>?@\[\]^`{|}])/g, '\\$1'); 
+                return String(s).replace(/([#!"$&'(),;<=>?@\[\\\]^`{|}])/g, '\\$1'); 
             }
         }).join(' ');
     };
