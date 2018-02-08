@@ -3,13 +3,29 @@
 
     // see http://unarchiver.c3.cx/commandline
     // unar and lsar
-
     var log = require('npmlog');
-    var quote = require('shell-quote').quote;
-    var child_process = require('child_process');
-    var exec = child_process.exec;
+    var exec = require('child_process').exec;
     var os = require('os');
-
+    
+    // from http://github.com/substack/node-shell-quote, needed to remove more escaping
+    var map = require('array-map');
+    function quote(xs) {
+        return map(xs, function (s) {
+            if (s && typeof s === 'object') {
+                return s.op.replace(/(.)/g, '\\$1');
+            }
+            else if (/["\s]/.test(s) && !/'/.test(s)) {
+                return "'" + s.replace(/(['\\])/g, '\\$1') + "'";
+            }
+            else if (/["'\s]/.test(s)) {
+                return '"' + s.replace(/(["\\$`!])/g, '\\$1') + '"';
+            }
+            else {
+                return String(s).replace(/([#!"$&'(),;<=>?@\[\\\]^`{|}])/g, '\\$1'); 
+            }
+        }).join(' ');
+    };
+    //
 
     module.exports = unpackAll.list = unpackAll;
 

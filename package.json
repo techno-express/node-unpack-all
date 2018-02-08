@@ -1,7 +1,7 @@
 {
-  "name": "unpack-all",
-  "version": "0.0.4",
-  "description": "Unpacker for node.js, wrapper for unar and lsar. See hunarchiver.c3.cx",
+  "name": "all-unpacker",
+  "version": "0.0.5",
+  "description": "All unpacker for zip, zipx, rar, 7z, tar, gzip, bzip2, lzma,... See theunarchiver.com for complete list, wrapper for unar and lsar.",
   "keywords": [
     "Unarchiver",
     "Unpacker",
@@ -22,19 +22,34 @@
     "email": "krocon@gmail.com",
     "url": "www.krocon.de"
   },
+  "contributors": [
+    "l. stubbs <technoexpressnet@gmail.com>"
+  ],
   "main": "index.js",
+  "scripts": {
+    "install": "node installer.js"
+  },
   "files": [
     "index.js",
+    "installer.js",
+    "*.md",
     "!test"
   ],
   "dependencies": {
     "npmlog": "^1.2.1",
-    "shell-quote": "github:techno-express/node-shell-quote"
+    "array-map": "~0.0.0",
+    "system-install": "^1.0.4",
+    "node-wget": "^0.4.2",
+    "unzipper": "^0.8.11"
   },
   "readmeFilename": "README.md",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krocon/node-unpack-all/issues"
+  },
+  "homepage": "https://github.com/krocon/node-unpack-all.git",
   "repository": {
     "type": "git",
-    "url": "https://github.com/krocon/node-unpack-all"
+    "url": "https://github.com/techno-express/node-unpack-all"
   }
 }
