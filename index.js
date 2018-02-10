@@ -163,9 +163,9 @@
 	
     unpackAll.unpackonly = function unpackonly(archiveFile, unpackDir, unpackOnly, options, callback) {
         if (!archiveFile) archiveFile = options.archiveFile;
-        if (!archiveFile) return callback(err, null);
-        if (!unpackDir) return callback(err, null);
-        if (!unpackOnly) return callback(err, null);
+        if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
+        if (!unpackDir) return callback(Error("Error: target Directory missing."), null);
+        if (!unpackOnly) return callback(Error("Error: files or directory to extract form archive missing."), null);
 
         if (!callback) callback = defaultListCallback;
         if (!options) options = {};
