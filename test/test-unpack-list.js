@@ -5,6 +5,7 @@ var list = require('../index.js').list;
 var unpackonly = require('../index.js').unpackonly;
 
 var archive = 'test/attr.7z';
+var archiveblank = 'test/blank.zip';
 var options = {
         targetDir : 'tmp',
         indexes : [0],
@@ -23,6 +24,13 @@ describe('Method: `list`', function () {
 		
     it('should return an error on if missing source file', function (done) {
         list(null, options, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });		
+	
+    it('should return an error on archive have no files', function (done) {
+        list(archiveblank, options, function (err, files, text) {
             if (err) expect(err).to.be.an.instanceof(Error);
             done();
         });
@@ -47,6 +55,13 @@ describe('Method: `unpack`', function () {
 	
     it('should return an error on if missing source file', function (done) {
         unpack(null, options, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });	
+		
+    it('should return an error on archive have no files or nothing extracted', function (done) {
+        unpack(archiveblank, options, function (err, files, text) {
             if (err) expect(err).to.be.an.instanceof(Error);
             done();
         });
@@ -98,7 +113,14 @@ describe('Method: `unpackonly`', function () {
             if (err) expect(err).to.be.an.instanceof(Error);
             done();
         });
-    });
+    });	
+	
+    it('should return an error on archive have no files or nothing extracted', function (done) {
+        unpackonly(archiveblank, 'tmp', ['normal file.txt','read-only file.txt'], { quiet: false }, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });	
            
     it('should not output any other file that suppplied', function (done) {
         unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt'], { quiet: false }, function (err, files, text) {
