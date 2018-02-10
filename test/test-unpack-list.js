@@ -124,21 +124,23 @@ describe('Method: `unpackonly`', function () {
            
     it('should not output any other file that suppplied', function (done) {
         unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt'], { quiet: false }, function (err, files, text) {
-            if (files) expect(files).to.not.contain('system file.txt')
+            if (files) expect(files).to.not.contain('system file.txt');
+            if (files) expect(files).to.have.string('read-only file.txt');
+            if (files) expect(files).to.have.string('normal file.txt');
             done();
         });
     }); 
-	
-	it('should output only files suppplied', function (done) {
-        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt'], { quiet: false }, function (err, files, text) {
-            if (files) expect(files).to.have.string('normal file.txt')
-            done();
-        });
-    }); 
-        
+	        
     it('should return output on fulfill', function (done) {
-        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt'], { quiet: false }, function (err, files, text) {
+        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt','system file.txt'], { quiet: false }, function (err, files, text) {
             if (text) expect(text).to.be.a('string');
+            done();
+        });
+    });	        
+	
+    it('should return output on fulfill using `-q option.quiet: true` switch', function (done) {
+        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt','system file.txt'], { quiet: true }, function (err, files, text) {
+            if (text) expect(text).to.not.contain('string');
             done();
         });
     });
