@@ -19,8 +19,15 @@ describe('Method: `list`', function () {
             if (err) expect(err).to.be.an.instanceof(Error);
             done();
         });
-    });
-    
+    });	
+		
+    it('should return an error on if missing source file', function (done) {
+        list(null, options, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });	
+               
     it('should return list of files by index', function (done) {
         list(archive, options, function (err, files, text) {
             if (files) expect(files[options.indexes]).to.be.a('string');
@@ -36,7 +43,14 @@ describe('Method: `unpack`', function () {
             if (err) expect(err).to.be.an.instanceof(Error);
             done();
         });
-    });
+    });    
+	
+    it('should return an error on if missing source file', function (done) {
+        unpack(null, options, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });	
            
     it('should output each file extracted', function (done) {
         unpack(archive, {
@@ -65,6 +79,13 @@ describe('Method: `unpack`', function () {
 
 describe('Method: `unpackonly`', function () {
     
+    it('should return an error on if missing source file', function (done) {
+        unpackonly(null, 'tmp', ['normal file.txt','read-only file.txt'], { quiet: false }, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });
+	
     it('should return an error on if missing target directory', function (done) {
         unpackonly(archive, null, ['normal file.txt','read-only file.txt'], { quiet: false }, function (err, files, text) {
             if (err) expect(err).to.be.an.instanceof(Error);
@@ -72,7 +93,7 @@ describe('Method: `unpackonly`', function () {
         });
     });
 	
-    it('should return an error on if missing file or directory to unpack', function (done) {
+    it('should return an error on if missing file or directory to unpack from archive', function (done) {
         unpackonly(archive, 'tmp', null, { quiet: false }, function (err, files, text) {
             if (err) expect(err).to.be.an.instanceof(Error);
             done();

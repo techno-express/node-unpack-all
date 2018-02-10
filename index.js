@@ -65,8 +65,7 @@
 
     unpackAll.unpack = function unpack(archiveFile, options, callback) {
         if (!archiveFile) archiveFile = options.archiveFile;
-        if (!archiveFile) return log.error("Error: archiveFile or options.archiveFile missing.");
-
+        if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
         if (!callback) callback = defaultListCallback;
         if (!options) options = {};
 
@@ -242,7 +241,7 @@
 	
     unpackAll.list = function list(archiveFile, options, callback) {
         if (!archiveFile) archiveFile = options.archiveFile;
-        if (!archiveFile) return log.error("Error: archiveFile or options.archiveFile missing.");
+        if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
         if (!callback) callback = defaultListCallback;
 
         if (!options) options = {};
