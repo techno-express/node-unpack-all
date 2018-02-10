@@ -153,7 +153,7 @@
             if (err) return callback(err, null);
             if (stderr && stderr.length > 0) return callback('Error: ' + stderr, null);
             if (stdout && stdout.length > 0) {
-                if (stdout.indexOf('No files extracted')>-1) return callback('Error: No files extracted', null);
+                if (stdout.indexOf('No files extracted')>-1) return callback(Error('Error: No files extracted'), null);
             }
 
             callback(null, targetDir, stdout);
@@ -232,7 +232,7 @@
             if (err) return callback(err, null);
             if (stderr && stderr.length > 0) return callback('Error: ' + stderr, null);
             if (stdout && stdout.length > 0) {
-                if (stdout.indexOf('No files extracted')>-1) return callback('Error: No files extracted', null);
+                if (stdout.indexOf('No files extracted')>-1) return callback(Error('Error: No files extracted'), null);
             }
 
             callback(null, targetDir, stdout);
@@ -298,7 +298,7 @@
                 return callback(null, files);
 
             } else {
-                return callback('Error: no files foound in archive. ' + stderr, null);
+                return callback(Error('Error: no files foound in archive. ' + stderr), null);
             }
         });
     }; // unpackAll.list
