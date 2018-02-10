@@ -2,6 +2,7 @@
 var expect = require('chai').expect;
 var unpack = require('../index.js').unpack;
 var list = require('../index.js').list;
+var unpackonly = require('../index.js').unpackonly;
 
 var archive = 'test/attr.7z';
 var options = {
