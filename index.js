@@ -150,8 +150,7 @@
     }; // unpackAll.unpack
 	
     unpackAll.unpackonly = function unpackonly(archiveFile, unpackDir, unpackOnly, callback) {
-        if (!archiveFile) archiveFile = options.archiveFile;
-        if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
+        if (!archiveFile) return callback(Error("Error: archiveFile missing."), null);
         if (!unpackDir) return callback(Error("Error: target Directory missing."), null);
         if (!unpackOnly) return callback(Error("Error: files or directory to extract form archive missing."), null);
 
@@ -191,7 +190,7 @@
         log.info('command', quote(ar));
 
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
-        if (!options.quiet) log.info('cmd', cmd);
+        log.info('cmd', cmd);
         exec(cmd, function (err, stdout, stderr) {
             if (err) return callback(err, null);
             if (stderr && stderr.length > 0) return callback('Error: ' + stderr, null);
