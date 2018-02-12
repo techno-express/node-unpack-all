@@ -26,17 +26,6 @@
 
     var archiveTypePattern = /: [A-Z,7]*$/g;
 
-    //var osType = os.type().toLowerCase();
-    //var isMac = function () {
-    //    return osType === 'darwin';
-    //};
-    //var isLinux = function () {
-    //    return osType === 'linux';
-    //};
-    //var isWindows = function () {
-    //    return osType.indexOf('win')>-1;
-    //};
-
     var escapeFileName = function(s) {
         return '"'+s+'"';
         //if (isWindows()) return '"'+s+'"';
@@ -160,18 +149,16 @@
         });
     }; // unpackAll.unpack
 	
-    unpackAll.unpackonly = function unpackonly(archiveFile, unpackDir, unpackOnly, options, callback) {
+    unpackAll.unpackonly = function unpackonly(archiveFile, unpackDir, unpackOnly, callback) {
         if (!archiveFile) archiveFile = options.archiveFile;
         if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
         if (!unpackDir) return callback(Error("Error: target Directory missing."), null);
         if (!unpackOnly) return callback(Error("Error: files or directory to extract form archive missing."), null);
 
         if (!callback) callback = defaultListCallback;
-        if (!options) options = {};
 
         // Unar command:
-        var unar = options.unar;
-        if (!unar) unar = (process.platform != "linux") ? path.join(__dirname,'unar') : 'unar';
+        var unar = (process.platform != "linux") ? path.join(__dirname,'unar') : 'unar';
         var ar = [unar];
 
         // Archive file (source):
@@ -191,29 +178,6 @@
         // -copy-time (-t): Copy the file modification time from the archive file to the containing directory, if one is created.
         ar.push('-t');
 
-        // -no-recursion (-nr): Do not attempt to extract archives contained in other archives. For instance, when unpacking a .tar.gz file, only unpack the .gz file and not its contents.
-        if (options.noRecursion) ar.push('-nr');
-
-        // -quiet (-q): Run in quiet mode.
-        if (options.quiet) ar.push('-q');
-
-        // -password (-p) <string>: The password to use for decrypting protected archives.
-        if (options.password) {
-            ar.push('-p');
-            ar.push(options.password);
-        }
-        // -password-encoding (-E) <name>: The encoding to use for the password for the archive, when it is not known. If not specified, then either the encoding given by the -encoding option or the auto-detected encoding is used.
-        if (options.passwordEncoding) {
-            ar.push('-E');
-            ar.push(options.passwordEncoding);
-        }
-
-        // -encoding (-e) <encoding name>: The encoding to use for filenames in the archive, when it is not known. If not specified, the program attempts to auto-detect the encoding used. Use "help" or "list" as the argument to give
-        if (options.encoding) {
-            ar.push('-e');
-            ar.push(options.encoding);
-        }
-
         if (unpackOnly) {
             if (Array.isArray(unpackOnly)) {
                 unpackOnly.forEach(function (s) {
@@ -224,7 +188,7 @@
             }
         }
 
-        if (!options.quiet) log.info('command', quote(ar));
+        log.info('command', quote(ar));
 
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
         if (!options.quiet) log.info('cmd', cmd);

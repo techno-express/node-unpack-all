@@ -95,35 +95,35 @@ describe('Method: `unpack`', function () {
 describe('Method: `unpackonly`', function () {
     
     it('should return an error on if missing source file', function (done) {
-        unpackonly(null, 'tmp', ['normal file.txt','read-only file.txt'], { quiet: false }, function (err, files, text) {
+        unpackonly(null, 'tmp', ['normal file.txt','read-only file.txt'], function (err, files, text) {
             if (err) expect(err).to.be.an.instanceof(Error);
             done();
         });
     });
 	
     it('should return an error on if missing target directory', function (done) {
-        unpackonly(archive, null, ['normal file.txt','read-only file.txt'], { quiet: false }, function (err, files, text) {
+        unpackonly(archive, null, ['normal file.txt','read-only file.txt'], function (err, files, text) {
             if (err) expect(err).to.be.an.instanceof(Error);
             done();
         });
     });
 	
     it('should return an error on if missing file or directory to unpack from archive', function (done) {
-        unpackonly(archive, 'tmp', null, { quiet: false }, function (err, files, text) {
+        unpackonly(archive, 'tmp', null, function (err, files, text) {
             if (err) expect(err).to.be.an.instanceof(Error);
             done();
         });
     });	
 	
     it('should return an error on archive have no files or nothing extracted', function (done) {
-        unpackonly(archiveblank, 'tmp', ['normal file.txt','read-only file.txt'], { quiet: false }, function (err, files, text) {
+        unpackonly(archiveblank, 'tmp', ['normal file.txt','read-only file.txt'], function (err, files, text) {
             if (err) expect(err).to.be.an.instanceof(Error);
             done();
         });
     });	
            
     it('should not output any other file that suppplied', function (done) {
-        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt'], { quiet: false }, function (err, files, text) {
+        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt'], function (err, files, text) {
             if (files) expect(files).to.not.contain('system file.txt');
             if (files) expect(files).to.have.string('read-only file.txt');
             if (files) expect(files).to.have.string('normal file.txt');
@@ -132,14 +132,14 @@ describe('Method: `unpackonly`', function () {
     }); 
 	        
     it('should return output on fulfill', function (done) {
-        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt','system file.txt'], { quiet: false }, function (err, files, text) {
+        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt','system file.txt'], function (err, files, text) {
             if (text) expect(text).to.be.a('string');
             done();
         });
     });	        
 	
     it('should return output on fulfill using `-q option.quiet: true` switch', function (done) {
-        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt','system file.txt'], { quiet: true }, function (err, files, text) {
+        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt','system file.txt'], function (err, files, text) {
             if (text) expect(text).to.not.contain('string');
             done();
         });
