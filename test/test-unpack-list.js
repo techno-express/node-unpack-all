@@ -122,7 +122,7 @@ describe('Method: `unpackonly`', function () {
         });
     });	
            
-    it('should not output any other file that suppplied', function (done) {
+    it('should not output any other file than what is suppplied', function (done) {
         unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt'], function (err, files, text) {
             if (files) expect(files).to.not.contain('system file.txt');
             if (files) expect(files).to.have.string('read-only file.txt');
@@ -137,11 +137,4 @@ describe('Method: `unpackonly`', function () {
             done();
         });
     });	        
-	
-    it('should return output on fulfill using `-q option.quiet: true` switch', function (done) {
-        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt','system file.txt'], function (err, files, text) {
-            if (text) expect(text).to.not.contain('string');
-            done();
-        });
-    });
 });
