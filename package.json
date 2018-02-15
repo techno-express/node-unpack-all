@@ -1,6 +1,6 @@
 {
   "name": "all-unpacker",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "All unpacker for zip, zipx, rar, 7z, tar, gzip, bzip2, lzma,... See theunarchiver.com for complete list, wrapper for unar and lsar.",
   "keywords": [
     "Unarchiver",
@@ -43,7 +43,7 @@
     "npmlog": "^1.2.1"
   },
   "optionalDependencies": {
-    "system-install": "^1.0.4",
+    "system-installer": "^1.0.6",
     "node-wget": "^0.4.2",
     "unzipper": "^0.8.11"
   },

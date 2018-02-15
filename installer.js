@@ -17,17 +17,13 @@ if ((process.platform == "win32") || (process.platform == "darwin")) {
         fs.unlink(source, (err) => { if (err) console.error(err); });
     })
     .catch(function (err) { console.log(err); }); 
-} else if (process.platform == "linux") {
-    const spawn = require('child_process').spawnSync;
-    const system_installer = require('system-install');
-    const cmd = system_installer().split(" ")[0];
-    const args = [ system_installer().split(" ")[1] ];
-    const install = [ system_installer().split(" ")[2] ];
-    const distro = args.concat(install).concat(['-y','unar']);
-    console.log('Running ' + cmd  + ' ' + distro);
-    var result = spawn(cmd, distro, { stdio: 'pipe' });
-    if (result.error) { console.error(result.error); }  
-    if (result.stdout.toString()) { console.log(result.stdout.toString()); }    
+} else {
+	const system_installer = require('system-installer').installer;
+	system_installer('unar')
+    .then(function() {
+        console.log('Unar installed successful');
+    })
+    .catch(function (err) { console.error(err); }); 
 }
 
 function getExtractUnar(urlsource, filesource, destination){
