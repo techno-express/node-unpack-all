@@ -12,12 +12,7 @@
     var map = require('array-map');
     function quote(xs) {
         return map(xs, function (s) {
-            if (s && typeof s === 'object') {
-                return s.op.replace(/(.)/g, '\\$1');
-            }
-            else {
-                return String(s).replace(/([#!"$&'(),;<=>?@\[\\\]^`{|}])/g, '\\$1'); 
-            }
+            return String(s).replace(/([#!"$&'(),;<=>?@\[\\\]^`{|}])/g, '\\$1'); 
         }).join(' ');
     };
     //
