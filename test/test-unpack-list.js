@@ -1,5 +1,6 @@
 'use strict';
 var expect = require('chai').expect;
+var sinon  = require('sinon');
 var unpack = require('../index.js').unpack;
 var list = require('../index.js').list;
 var unpackonly = require('../index.js').unpackonly;
@@ -42,6 +43,36 @@ describe('Method: `list`', function () {
             done();
         });
     });
+});
+
+describe('Method: `list` with no callback function', function () {
+    it('should return an error on lsar error', function (done) {
+        var result = list('??', options), {
+            expect(result).to.be.an.instanceof(Error);
+            done();
+        });
+    });	
+		
+    it('should return an error on if missing source file', function (done) {
+        var result = list(null, options, {
+            expect(result).to.be.an.instanceof(Error);
+            done();
+        });
+    });		
+	
+    it('should return an error on archive have no files', function (done) {
+        var result = list(archiveblank, options);
+            expect(result).to.be.an.instanceof(Error);
+            done();
+    });	
+    
+    var filelist = sinon.spy(log, 'info');
+    it('should return list of files by index', function (done) {
+        list(archive, options);
+            expect(filelist).to.have.been.called;
+            done();
+    });
+    filelist.restore();
 });
 
 describe('Method: `unpack`', function () {
@@ -90,6 +121,51 @@ describe('Method: `unpack`', function () {
             done();
         });
     });
+});
+
+describe('Method: `unpack` with no callback function', function () {
+
+    it('should return an error on unar error', function (done) {
+        var result = unpack('???', options); 
+            expect(result).to.be.an.instanceof(Error);
+            done();        
+    });    
+	
+    it('should return an error on if missing source file', function (done) {
+        var result = unpack(null, options); 
+            expect(result).to.be.an.instanceof(Error);
+            done();
+    });	
+		
+    it('should return an error on archive have no files or nothing extracted', function (done) {
+        var result = unpack(archiveblank, options);
+            expect(result).to.be.an.instanceof(Error);
+            done();
+    });	
+    
+    var output = sinon.spy(npmlog, 'info');          
+    it('should output each file extracted', function (done) {
+        unpack(archive, {
+            targetDir : 'tmp',
+            forceOverwrite: true,
+            noDirectory: true,
+            quiet: false 
+        });
+            expect(output).to.have.been.called;
+            done();
+    }); 
+        
+    it('should return output on fulfill', function (done) {
+        unpack(archive, {
+            targetDir : 'tmp',
+            forceOverwrite: true,
+            noDirectory: true,
+            quiet: false
+        });
+            expect(output).to.have.been.called;
+            done();
+    });
+    output.restore();
 });
 
 describe('Method: `unpackonly`', function () {
