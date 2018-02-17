@@ -135,8 +135,8 @@
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
         if (!options.quiet) log.info('cmd', cmd);
         exec(cmd, function (err, stdout, stderr) {
-            if (err) return callback(err, null);
-            if (stderr && stderr.length > 0) return callback('Error: ' + stderr, null);
+            if (err) return callback(Error(err), null);
+            if (stderr && stderr.length > 0) return callback(Error('Error: ' + stderr), null);
             if (stdout && stdout.length > 0) {
                 if (stdout.indexOf('No files extracted')>-1) return callback(Error('Error: No files extracted'), null);
             }
@@ -187,8 +187,8 @@
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
         log.info('cmd', cmd);
         exec(cmd, function (err, stdout, stderr) {
-            if (err) return callback(err, null);
-            if (stderr && stderr.length > 0) return callback('Error: ' + stderr, null);
+            if (err) return callback(Error(err), null);
+            if (stderr && stderr.length > 0) return callback(Error('Error: ' + stderr), null);
             if (stdout && stdout.length > 0) {
                 if (stdout.indexOf('No files extracted')>-1) return callback(Error('Error: No files extracted'), null);
             }
@@ -247,8 +247,8 @@
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
         if (!options.quiet) log.info('cmd', cmd);
         exec(cmd, function (err, stdout, stderr) {
-            if (err) return callback(err, null);
-            if (stderr && stderr.length > 0) return callback('Error: ' + stderr, null);
+            if (err) return callback(Error(err), null);
+            if (stderr && stderr.length > 0) return callback(Error('Error: ' + stderr), null);
 
             var lines = stdout.split(/(\r?\n)/g);
             if (lines.length > 0) {
