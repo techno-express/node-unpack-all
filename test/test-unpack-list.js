@@ -64,7 +64,7 @@ describe('Method: `list` with no callback function', function () {
             done();
     });	
     
-    var filelist = sinon.spy(log, 'info');
+    var filelist = sinon.spy(npmlog, 'info');
     it('should return list of files by index', function (done) {
         list(archive, options);
             expect(filelist).to.have.been.called;
