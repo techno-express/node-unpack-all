@@ -1,6 +1,6 @@
 {
   "name": "all-unpacker",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "All unpacker for zip, zipx, rar, 7z, tar, gzip, bzip2, lzma,... See theunarchiver.com for complete list, wrapper for unar and lsar.",
   "keywords": [
     "Unarchiver",
@@ -62,7 +62,6 @@
     "fs-extra": "^5.0.0",
     "coveralls": "^3.0.0",
     "istanbul": "^0.4.5",
-    "mocha": "^5.0.0",
-    "sinon": "^4.3.0"
+    "mocha": "^5.0.0"
   }
 }
