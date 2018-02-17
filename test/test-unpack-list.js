@@ -47,17 +47,15 @@ describe('Method: `list`', function () {
 
 describe('Method: `list` with no callback function', function () {
     it('should return an error on lsar error', function (done) {
-        var result = list('??', options), {
+        var result = list('??', options);
             expect(result).to.be.an.instanceof(Error);
-            done();
-        });
+            done();;
     });	
 		
     it('should return an error on if missing source file', function (done) {
-        var result = list(null, options, {
+        var result = list(null, options);
             expect(result).to.be.an.instanceof(Error);
             done();
-        });
     });		
 	
     it('should return an error on archive have no files', function (done) {
