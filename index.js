@@ -28,7 +28,7 @@
         //return s;
     };
 
-    var defaultListCallback = function (err, files, text) {
+    var defaultListCallback = function(err, files, text) {
         if (err) return new Error(err);
 
         if (files) log.info('files', files);
@@ -48,9 +48,9 @@
     };
 
     unpackAll.unpack = function unpack(archiveFile, options, callback) {
+        if (!callback) callback = defaultListCallback;
         if (!archiveFile) archiveFile = options.archiveFile;
         if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
-        if (!callback) callback = function defaultListCallback;
         if (!options) options = {};
 
         // Unar command:
@@ -145,11 +145,10 @@
     }; // unpackAll.unpack
 	
     unpackAll.unpackonly = function unpackonly(archiveFile, unpackDir, unpackOnly, callback) {
+        if (!callback) callback = defaultListCallback;
         if (!archiveFile) return callback(Error("Error: archiveFile missing."), null);
         if (!unpackDir) return callback(Error("Error: target Directory missing."), null);
         if (!unpackOnly) return callback(Error("Error: files or directory to extract form archive missing."), null);
-
-        if (!callback) callback = function defaultListCallback;
 
         // Unar command:
         var unar = (process.platform != "linux") ? path.join(__dirname,'unar') : 'unar';
@@ -198,9 +197,9 @@
     }; // unpackAll.unpackonly
 	
     unpackAll.list = function list(archiveFile, options, callback) {
+        if (!callback) callback = defaultListCallback;
         if (!archiveFile) archiveFile = options.archiveFile;
         if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
-        if (!callback) callback = function defaultListCallback;
 
         if (!options) options = {};
 
