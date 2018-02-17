@@ -29,7 +29,7 @@
     };
 
     var defaultListCallback = function (err, files, text) {
-        if (err) return log.error(err);
+        if (err) return new Error(err);
 
         if (files) log.info('files', files);
         if (text) log.info('text' , text);
