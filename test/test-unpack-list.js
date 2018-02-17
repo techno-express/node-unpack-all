@@ -49,19 +49,19 @@ describe('Method: `list`', function () {
 describe('Method: `list` with no callback function', function () {
     it('should return an error on lsar error', function (done) {
         var result = list('??', options);
-            expect(result.error).to.be.an.instanceof(Error);
+            expect(result).to.be.an.instanceof(Error);
             done();
     });	
 		
     it('should return an error on if missing source file', function (done) {
         var result = list(null, options);
-            expect(result.error).to.be.an.instanceof(Error);
+            expect(result).to.be.an.instanceof(Error);
             done();
     });		
 	
     it('should return an error on archive have no files', function (done) {
         var result = list(archiveblank, options);
-            expect(result.error).to.be.an.instanceof(Error);
+            expect(result).to.be.an.instanceof(Error);
             done();
     });	
     
@@ -126,19 +126,19 @@ describe('Method: `unpack` with no callback function', function () {
 
     it('should return an error on unar error', function (done) {
         var result = unpack('???', options); 
-            expect(result.error).to.be.an.instanceof(Error);
+            expect(result).to.be.an.instanceof(Error);
             done();        
     });    
 	
     it('should return an error on if missing source file', function (done) {
         var result = unpack(null, options); 
-            expect(result.error).to.be.an.instanceof(Error);
+            expect(result).to.be.an.instanceof(Error);
             done();
     });	
 		
     it('should return an error on archive have no files or nothing extracted', function (done) {
         var result = unpack(archiveblank, options);
-            expect(result.error).to.be.an.instanceof(Error);
+            expect(result).to.be.an.instanceof(Error);
             done();
     });	
     
