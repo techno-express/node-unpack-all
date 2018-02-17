@@ -1,6 +1,7 @@
 'use strict';
 var expect = require('chai').expect;
 var sinon  = require('sinon');
+var log = require('npmlog');
 var unpack = require('../index.js').unpack;
 var list = require('../index.js').list;
 var unpackonly = require('../index.js').unpackonly;
@@ -64,7 +65,7 @@ describe('Method: `list` with no callback function', function () {
             done();
     });	
     
-    var filelist = sinon.spy(npmlog, 'info');
+    var filelist = sinon.spy(log, 'info');
     it('should return list of files by index', function (done) {
         list(archive, options);
             expect(filelist).to.have.been.called;
@@ -141,7 +142,7 @@ describe('Method: `unpack` with no callback function', function () {
             done();
     });	
     
-    var output = sinon.spy(npmlog, 'info');          
+    var output = sinon.spy(log, 'info');          
     it('should output each file extracted', function (done) {
         unpack(archive, {
             targetDir : 'tmp',
