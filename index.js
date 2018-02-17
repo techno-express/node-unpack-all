@@ -28,14 +28,6 @@
         //return s;
     };
 
-    var defaultListCallback = function(err, files, text) {
-        if (err) return new Error(err);
-
-        if (files) log.info('files', files);
-        if (text) log.info('text' , text);
-        return;
-    };
-
     var isInt = function isInt(x) {
         return !isNaN(x) && eval(x).toString().length == parseInt(eval(x)).toString().length;
     };
@@ -49,7 +41,7 @@
     };
 
     unpackAll.unpack = function unpack(archiveFile, options, callback) {
-        if (!callback) callback = defaultListCallback;
+        if (!callback) return new Error('No callback function');
         if (!archiveFile) archiveFile = options.archiveFile;
         if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
         if (!options) options = {};
@@ -146,7 +138,7 @@
     }; // unpackAll.unpack
 	
     unpackAll.unpackonly = function unpackonly(archiveFile, unpackDir, unpackOnly, callback) {
-        if (!callback) callback = defaultListCallback;
+        if (!callback) return new Error('No callback function');
         if (!archiveFile) return callback(Error("Error: archiveFile missing."), null);
         if (!unpackDir) return callback(Error("Error: target Directory missing."), null);
         if (!unpackOnly) return callback(Error("Error: files or directory to extract form archive missing."), null);
@@ -198,7 +190,7 @@
     }; // unpackAll.unpackonly
 	
     unpackAll.list = function list(archiveFile, options, callback) {
-        if (!callback) callback = defaultListCallback;
+        if (!callback) return new Error('No callback function');
         if (!archiveFile) archiveFile = options.archiveFile;
         if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
 
