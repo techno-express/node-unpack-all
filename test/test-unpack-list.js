@@ -49,7 +49,7 @@ describe('Method: `list` with no callback function', function () {
     it('should return an error on lsar error', function (done) {
         var result = list('??', options);
             expect(result.error).to.be.an.instanceof(Error);
-            done();;
+            done();
     });	
 		
     it('should return an error on if missing source file', function (done) {
