@@ -33,6 +33,7 @@
 
         if (files) log.info('files', files);
         if (text) log.info('text' , text);
+        return;
     };
 
     var isInt = function isInt(x) {
