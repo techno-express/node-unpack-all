@@ -39,7 +39,18 @@
             && s.indexOf('\n') == -1
             && !s.match(archiveTypePattern);
     };
-
+    
+    function exec_unar(runcmd, docallback) {
+        exec(runcmd, function (err, stdout, stderr) {
+            if (err) return docallback(Error(err), null);
+            if (stderr && stderr.length > 0) return docallback(Error('Error: ' + stderr), null);
+            if (stdout && stdout.length > 0) {
+                if (stdout.indexOf('No files extracted')>=1) return docallback(Error('Error: No files extracted'), null);
+            }
+            docallback(null, targetDir, stdout);
+        }            
+    });
+    
     unpackAll.unpack = function unpack(archiveFile, options, callback) {
         if (!callback) return new Error('No callback function');
         if (!archiveFile) archiveFile = options.archiveFile;
@@ -126,17 +137,9 @@
 
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
         if (!options.quiet) log.info('cmd', cmd);
-        exec(cmd, function (err, stdout, stderr) {
-            if (err) return callback(Error(err), null);
-            if (stderr && stderr.length > 0) return callback(Error('Error: ' + stderr), null);
-            if (stdout && stdout.length > 0) {
-                if (stdout.indexOf('No files extracted')>-1) return callback(Error('Error: No files extracted'), null);
-            }
-
-            callback(null, targetDir, stdout);
-        });
+        exec_unar(cmd, callback);
     }; // unpackAll.unpack
-	
+
     unpackAll.unpackonly = function unpackonly(archiveFile, unpackDir, unpackOnly, callback) {
         if (!callback) return new Error('No callback function');
         if (!archiveFile) return callback(Error("Error: archiveFile missing."), null);
@@ -178,15 +181,7 @@
 
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
         log.info('cmd', cmd);
-        exec(cmd, function (err, stdout, stderr) {
-            if (err) return callback(Error(err), null);
-            if (stderr && stderr.length > 0) return callback(Error('Error: ' + stderr), null);
-            if (stdout && stdout.length > 0) {
-                if (stdout.indexOf('No files extracted')>-1) return callback(Error('Error: No files extracted'), null);
-            }
-
-            callback(null, targetDir, stdout);
-        });
+        exec_unar(cmd, callback);
     }; // unpackAll.unpackonly
 	
     unpackAll.list = function list(archiveFile, options, callback) {
