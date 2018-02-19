@@ -48,8 +48,8 @@
                 if (stdout.indexOf('No files extracted')>=1) return docallback(Error('Error: No files extracted'), null);
             }
             docallback(null, targetDir, stdout);
-        }            
-    });
+        });
+    }
     
     unpackAll.unpack = function unpack(archiveFile, options, callback) {
         if (!callback) return new Error('No callback function');
