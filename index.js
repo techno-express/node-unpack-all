@@ -181,7 +181,7 @@
 
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
         log.info('cmd', cmd);
-        exec_unar(cmd, targetDir, callback);
+        exec_unar(cmd, unpackDir, callback);
     }; // unpackAll.unpackonly
 	
     unpackAll.list = function list(archiveFile, options, callback) {
