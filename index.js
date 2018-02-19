@@ -47,7 +47,7 @@
             if (stdout && stdout.length > 0) {
                 if (stdout.indexOf('No files extracted')>=1) return docallback(Error('Error: No files extracted'), null);
             }
-            docallback(null, targetDir, stdout);
+            return docallback(null, targetDir, stdout);
         });
     }
     
