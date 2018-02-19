@@ -40,14 +40,14 @@
             && !s.match(archiveTypePattern);
     };
     
-    function exec_unar(runcmd, docallback) {
+    function exec_unar(runcmd, extractDir, docallback) {
         exec(runcmd, function (err, stdout, stderr) {
             if (err) return docallback(Error(err), null);
             if (stderr && stderr.length > 0) return docallback(Error('Error: ' + stderr), null);
             if (stdout && stdout.length > 0) {
                 if (stdout.indexOf('No files extracted')>=1) return docallback(Error('Error: No files extracted'), null);
             }
-            return docallback(null, targetDir, stdout);
+            return docallback(null, extractDir, stdout);
         });
     }
     
@@ -137,7 +137,7 @@
 
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
         if (!options.quiet) log.info('cmd', cmd);
-        exec_unar(cmd, callback);
+        exec_unar(cmd, targetDir, callback);
     }; // unpackAll.unpack
 
     unpackAll.unpackonly = function unpackonly(archiveFile, unpackDir, unpackOnly, callback) {
@@ -181,7 +181,7 @@
 
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
         log.info('cmd', cmd);
-        exec_unar(cmd, callback);
+        exec_unar(cmd, targetDir, callback);
     }; // unpackAll.unpackonly
 	
     unpackAll.list = function list(archiveFile, options, callback) {

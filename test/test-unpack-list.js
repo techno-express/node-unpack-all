@@ -47,6 +47,13 @@ describe('Method: `list`', function () {
             if (files) expect(files[options.indexes]).to.be.a('string');
             done();
         });
+    });       
+    
+    it('should return list of files by index `options` null', function (done) {
+        list(archive, null, function (err, files, text) {
+            if (files) expect(files[options.indexes]).to.be.a('string');
+            done();
+        });
     });
 });
 
@@ -95,6 +102,13 @@ describe('Method: `unpack`', function () {
             done();
         });
     }); 
+    
+    it('should output each file extracted `options` null', function (done) {
+        unpack(archive, null, function (err, files, text) {
+            if (files) expect(files).to.be.a('string');
+            done();
+        });
+    }); 
         
     it('should return output on fulfill', function (done) {
         unpack(archive, {
@@ -103,6 +117,13 @@ describe('Method: `unpack`', function () {
         noDirectory: true,
         quiet: false
     }, function (err, files, text) {
+            if (text) expect(text).to.be.a('string');
+            done();
+        });
+    });    
+    
+    it('should return output on fulfill `options` null', function (done) {
+        unpack(archive, null, function (err, files, text) {
             if (text) expect(text).to.be.a('string');
             done();
         });
@@ -154,6 +175,13 @@ describe('Method: `unpackonly`', function () {
         });
     }); 
 	        
+    it('should return output on fulfill', function (done) {
+        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt','system file.txt'], function (err, files, text) {
+            if (text) expect(text).to.be.a('string');
+            done();
+        });
+    });	      
+    
     it('should return output on fulfill', function (done) {
         unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt','system file.txt'], function (err, files, text) {
             if (text) expect(text).to.be.a('string');
