@@ -43,8 +43,8 @@
     "npmlog": "^1.2.1"
   },
   "optionalDependencies": {
-    "system-installer": "^1.0.6",
     "node-wget": "^0.4.2",
+    "system-installer": "^1.0.8",
     "unzipper": "^0.8.11"
   },
   "readmeFilename": "README.md",
