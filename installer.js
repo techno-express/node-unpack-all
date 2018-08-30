@@ -15,6 +15,11 @@ if ((process.platform == "win32") || (process.platform == "darwin")) {
     getExtractUnar(url, source, cwd)
     .then(function() {
         fs.unlink(source, (err) => { if (err) console.error(err); });
+        if (process.platform != "win32") {
+            var chmod = ['unar', 'lsar'];
+            chmod.forEach(function(s) { fs.chmodSync(path.join(cwd,s), 755) });
+        }
+        console.log('Unar installed successful');
     })
     .catch(function (err) { console.log(err); }); 
 } else {
