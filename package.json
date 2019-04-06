@@ -50,9 +50,9 @@
   "readmeFilename": "README.md",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/krocon/node-unpack-all/issues"
+    "url": "https://github.com/techno-express/node-unpack-all/issues"
   },
-  "homepage": "https://github.com/krocon/node-unpack-all.git",
+  "homepage": "https://github.com/techno-express/node-unpack-all.git",
   "repository": {
     "type": "git",
     "url": "https://github.com/techno-express/node-unpack-all"
