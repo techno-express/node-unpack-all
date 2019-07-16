@@ -45,7 +45,7 @@
   "optionalDependencies": {
     "node-wget": "^0.4.2",
     "system-installer": "^1.1.0",
-    "unzipper": "^0.9.3"
+    "unzipper": "^0.10.1"
   },
   "readmeFilename": "README.md",
   "license": "MIT",
