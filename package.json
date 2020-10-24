@@ -28,7 +28,6 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "coverage": "istanbul cover node_modules/mocha/bin/_mocha --dir .tmp/coverage",
     "coveralls": "npm install coveralls && cat .tmp/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "install": "node installer.js"
   },
@@ -61,7 +60,6 @@
     "chai": "^4.1.2",
     "fs-extra": "^8.0.0",
     "coveralls": "^3.1.0",
-    "istanbul": "^0.4.5",
     "mocha": "^6.2.0"
   }
 }

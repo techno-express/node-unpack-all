@@ -7,12 +7,12 @@
     var path = require('path');
     var exec = require('child_process').exec;
     var os = require('os');
-    
+
     // from http://github.com/substack/node-shell-quote, needed to remove more escaping
     var map = require('array-map');
     function quote(xs) {
         return map(xs, function (s) {
-            return String(s).replace(/([#!"$&'(),;<=>?@\[\\\]^`{|}])/g, '\\$1'); 
+            return String(s).replace(/([#!"$&'(),;<=>?@\[\\\]^`{|}])/g, '\\$1');
         }).join(' ');
     };
     //
@@ -39,18 +39,18 @@
             && s.indexOf('\n') == -1
             && !s.match(archiveTypePattern);
     };
-    
-    function exec_unar(runcmd, extractDir, docallback) {
-        exec(runcmd, function (err, stdout, stderr) {
-            if (err) return docallback(Error(err), null);
-            if (stderr && stderr.length > 0) return docallback(Error('Error: ' + stderr), null);
+
+    function exec_unar(runCmd, extractDir, doCallback) {
+        exec(runCmd, function (err, stdout, stderr) {
+            if (err) return doCallback(Error(err), null);
+            if (stderr && stderr.length > 0) return doCallback(Error('Error: ' + stderr), null);
             if (stdout && stdout.length > 0) {
-                if (stdout.indexOf('No files extracted')>=1) return docallback(Error('Error: No files extracted'), null);
+                if (stdout.indexOf('No files extracted')>=1) return doCallback(Error('Error: No files extracted'), null);
             }
-            return docallback(null, extractDir, stdout);
+            return doCallback(null, extractDir, stdout);
         });
     }
-    
+
     unpackAll.unpack = function unpack(archiveFile, options, callback) {
         if (!callback) return new Error('No callback function');
         if (!archiveFile) archiveFile = options.archiveFile;
@@ -183,7 +183,7 @@
         log.info('cmd', cmd);
         exec_unar(cmd, unpackDir, callback);
     }; // unpackAll.unpackonly
-	
+
     unpackAll.list = function list(archiveFile, options, callback) {
         if (!callback) return new Error('No callback function');
         if (!archiveFile) archiveFile = options.archiveFile;
@@ -243,7 +243,7 @@
                 return callback(null, files);
 
             } else {
-                return callback(Error('Error: no files foound in archive. ' + stderr), null);
+                return callback(Error('Error: no files found in archive. ' + stderr), null);
             }
         });
     }; // unpackAll.list
