@@ -43,7 +43,7 @@
     "npmlog": "^4.1.2"
   },
   "optionalDependencies": {
-    "node-wget": "^0.4.2",
+    "wget-improved": "^3.2.1",
     "system-installer": "^1.1.0",
     "unzipper": "^0.10.1"
   },
