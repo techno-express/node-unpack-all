@@ -28,7 +28,6 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "coveralls": "npm install coveralls && cat .tmp/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "install": "node installer.js"
   },
   "files": [
@@ -59,7 +58,6 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "fs-extra": "^8.0.0",
-    "coveralls": "^3.1.0",
     "mocha": "^6.2.0"
   }
 }
