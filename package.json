@@ -1,6 +1,6 @@
 {
   "name": "all-unpacker",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "All unpacker for zip, zipx, rar, 7z, tar, gzip, bzip2, lzma,... See theunarchiver.com for complete list, wrapper for unar and lsar.",
   "keywords": [
     "Unarchiver",
@@ -15,7 +15,8 @@
     "LZMA,XZ",
     "Mac OS X",
     "Windows",
-    "Linux"
+    "Linux",
+    "Apple"
   ],
   "author": {
     "name": "Marc Kronberg",
