@@ -41,33 +41,25 @@ if ((process.platform == "win32") || (process.platform == "darwin")) {
 }
 
 function getExtractUnar(urlSource, fileSource, destination) {
-    var node_wget = require("node-wget-js");
-    var StreamZip = require('node-stream-zip');
+    const node_wget = require("node-wget-fetch");
     console.log('Downloading ' + urlSource);
-    return new Promise(function (resolve, reject) {
-        node_wget({
-            url: urlSource,
-            dest: fileSource
-        }, function (err) {
-            if (err) {
-                return reject('Error downloading file: ' + err);
-            }
-
-            var unzip = new StreamZip({
+    return node_wget(urlSource, fileSource)
+        .then((info) => {
+            const StreamZip = require('node-stream-zip');
+            const unzip = new StreamZip({
                 file: fileSource,
                 storeEntries: true
             });
-
             unzip.on('ready', () => {
                 unzip.extract(null, destination, (err, count) => {
                     unzip.close();
                     if (err) {
-                        return reject(err);
+                        return new Error(err) ;
                     }
 
-                    return resolve(count);
+                    return count;
                 });
             });
-        });
-    });
+        })
+        .catch((err) => console.log('Error downloading file: ' + err));
 }

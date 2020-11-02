@@ -13,6 +13,7 @@ It allows you to unpack a lot of formats: zip, zipx, rar, 7z, tar, gzip, bzip2, 
 This package differs from fork https://github.com/krocon/node-unpack-all in that the necessary cli tool lsar and unar, will be downloaded to package directory at install time. If your host is Linux your package manager will be used to install unar onto your system. For more info see [here](http://unarchiver.c3.cx/commandline).
 
 ## Usage
+
 ```js
 var ua = require('all-unpacker');
 // list only:
@@ -24,6 +25,7 @@ ua.unpack(archiveFile<String>, options<Object>, callback<function>)
 ### Examples
 
 #### Example: unpack file
+
 ```js
 require('all-unpacker')
 .unpack('test/abc.rar', {
@@ -36,6 +38,7 @@ require('all-unpacker')
 ```
 
 #### Example: list content
+
 ```js
 function cb(err, files, text) {
     if (err) return console.error(err);
@@ -43,7 +46,6 @@ function cb(err, files, text) {
 }
 require('all-unpacker').list('test/abc.rar', {}, cb);
 ```
-
 
 ### Options
 
