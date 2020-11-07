@@ -1,6 +1,6 @@
 {
   "name": "all-unpacker",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "All unpacker for zip, zipx, rar, 7z, tar, gzip, bzip2, lzma,... See theunarchiver.com for complete list, wrapper for unar and lsar.",
   "keywords": [
     "Unarchiver",
@@ -34,18 +34,16 @@
   },
   "files": [
     "*.js",
-    "*.md",
-    "test",
-    "!demoFirstEntry.js"
+    "*.md"
   ],
   "dependencies": {
     "array-map": "~0.0.0",
     "npmlog": "^4.1.2"
   },
   "optionalDependencies": {
-    "node-wget-fetch": "^1.0.0",
-    "system-installer": "^1.1.3",
-    "node-stream-zip": "^1.11.3"
+    "node-wget-fetch": "^1.0.1",
+    "system-installer": "^1.1.4",
+    "node-stream-zip": "^1.11.4"
   },
   "readmeFilename": "README.md",
   "license": "MIT",
