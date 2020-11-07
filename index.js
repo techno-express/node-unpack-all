@@ -3,7 +3,6 @@
 
     // see http://unarchiver.c3.cx/commandline
     // unar and lsar
-    var log = require('npmlog');
     var path = require('path');
     var exec = require('child_process').exec;
     var os = require('os');
@@ -133,10 +132,10 @@
             }
         }
 
-        if (!options.quiet) log.info('command', quote(ar));
+        if (!options.quiet) console.info('command', quote(ar));
 
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
-        if (!options.quiet) log.info('cmd', cmd);
+        if (!options.quiet) console.info('cmd', cmd);
         exec_unar(cmd, targetDir, callback);
     }; // unpackAll.unpack
 
@@ -177,10 +176,10 @@
             }
         }
 
-        log.info('command', quote(ar));
+        console.info('command', quote(ar));
 
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
-        log.info('cmd', cmd);
+        console.info('cmd', cmd);
         exec_unar(cmd, unpackDir, callback);
     }; // unpackAll.unpackonly
 
@@ -232,7 +231,7 @@
         if (options.jsonAscii) ar.push('-ja');
 
         var cmd  = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
-        if (!options.quiet) log.info('cmd', cmd);
+        if (!options.quiet) console.info('cmd', cmd);
         exec(cmd, function (err, stdout, stderr) {
             if (err) return callback(Error(err), null);
             if (stderr && stderr.length > 0) return callback(Error('Error: ' + stderr), null);

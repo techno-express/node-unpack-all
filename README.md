@@ -3,7 +3,7 @@ all-unpacker
 
 [![NPM](https://nodei.co/npm/all-unpacker.png)](https://nodei.co/npm/all-unpacker/)
 
-[![Dependencies Status][david-image]][david-url] [![Node.js CI](https://github.com/techno-express/node-unpack-all/workflows/Node.js%20CI/badge.svg)](https://github.com/techno-express/node-unpack-all/actions) [![Maintainability][codeclimate-image]][codeclimate-url][![Release][npm-image]][npm-url]
+[![Dependencies Status][david-image]][david-url] [![Node.js CI](https://github.com/techno-express/node-unpack-all/workflows/Node.js%20CI/badge.svg)](https://github.com/techno-express/node-unpack-all/actions) [![codecov](https://codecov.io/gh/techno-express/node-unpack-all/branch/master/graph/badge.svg?token=d9L7TvbndH)](https://codecov.io/gh/techno-express/node-unpack-all) [![Maintainability][codeclimate-image]][codeclimate-url][![Release][npm-image]][npm-url]
 
 > Wrapper for [unar and lsar](http://unarchiver.c3.cx/commandline) command line tool.
 It allows you to unpack a lot of formats: zip, zipx, rar, 7z, tar, gzip, bzip2, lzma, cab, msi, cpio,... [complete list](http://unarchiver.c3.cx/formats)
