@@ -1,6 +1,6 @@
 {
   "name": "all-unpacker",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "All unpacker for zip, zipx, rar, 7z, tar, gzip, bzip2, lzma,... See theunarchiver.com for complete list, wrapper for unar and lsar.",
   "keywords": [
     "Unarchiver",
@@ -37,8 +37,8 @@
     "*.md"
   ],
   "optionalDependencies": {
-    "node-wget-fetch": "^1.0.1",
-    "system-installer": "^1.1.4",
+    "node-wget-fetch": "^1.0.3",
+    "system-installer": "^1.1.5",
     "node-stream-zip": "^1.11.4"
   },
   "readmeFilename": "README.md",
@@ -54,7 +54,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "codecov": "^3.8.0",
-    "fs-extra": "^8.0.0",
-    "mocha": "^7.2.0"
+    "fs-extra": "^9.0.1",
+    "mocha": "^8.1.3"
   }
 }
