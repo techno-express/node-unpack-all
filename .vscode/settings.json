@@ -1,9 +1,14 @@
 {
     "cSpell.words": [
+        "Bzip",
+        "LZMA",
+        "Unarchiver",
         "Usar",
+        "Zipx",
         "codecov",
         "lsar",
         "npmlog",
+        "theunarchiver",
         "unar",
         "unpackonly"
     ]
