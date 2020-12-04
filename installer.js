@@ -2,11 +2,11 @@
 
 'use strict'
 
-var fs = require('fs');
+var fs = require('fs-extra');
 var path = require('path');
 
-const unarAppFile = (process.platform == "darwin") ? 'unar1.8.1.zip' : 'unar1.8.1_win.zip';
-const unarAppUrl = 'https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/theunarchiver/';
+const unarAppFile = (process.platform == "darwin") ? 'unarMac.zip' : 'unarWindows.zip';
+const unarAppUrl = 'https://cdn.theunarchiver.com/downloads/';
 
 const cwd = process.cwd();
 const url = unarAppUrl + unarAppFile;
@@ -18,6 +18,8 @@ if ((process.platform == "win32") || (process.platform == "darwin")) {
             fs.unlink(source, (err) => {
                 if (err) console.error(err);
             });
+            if (process.platform == 'win32')
+                fs.removeSync(path.join(cwd, '__MACOSX'));
             if (process.platform != "win32") {
                 var chmod = ['unar', 'lsar'];
                 chmod.forEach(function (s) {

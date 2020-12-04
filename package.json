@@ -1,6 +1,6 @@
 {
   "name": "all-unpacker",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "All unpacker for zip, zipx, rar, 7z, tar, gzip, bzip2, lzma,... See theunarchiver.com for complete list, wrapper for unar and lsar.",
   "keywords": [
     "Unarchiver",
@@ -28,8 +28,8 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "coverage": "npx nyc@latest --reporter json --reporter text mocha -R list test/*.js && codecov -f coverage/coverage-final.json",
+    "test": "mocha --recursive test/",
+    "coverage": "npx nyc@latest --reporter json --reporter text mocha -R list test/*.js && npx codecov -f coverage/coverage-final.json",
     "install": "node installer.js"
   },
   "files": [
@@ -39,7 +39,8 @@
   "optionalDependencies": {
     "node-wget-fetch": "^1.0.5",
     "system-installer": "^1.1.5",
-    "node-stream-zip": "^1.11.7"
+    "node-stream-zip": "^1.12.0",
+    "fs-extra": "^9.0.1"
   },
   "readmeFilename": "README.md",
   "license": "MIT",
@@ -53,8 +54,6 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "codecov": "^3.8.0",
-    "fs-extra": "^9.0.1",
     "mocha": "^7.2.0"
   }
 }
