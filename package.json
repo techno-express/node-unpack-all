@@ -1,6 +1,6 @@
 {
   "name": "all-unpacker",
-  "version": "0.1.13",
+  "version": "1.0.0",
   "description": "All unpacker for zip, zipx, rar, 7z, tar, gzip, bzip2, lzma,... See theunarchiver.com for complete list, wrapper for unar and lsar.",
   "keywords": [
     "Unarchiver",
@@ -26,18 +26,23 @@
   "contributors": [
     "l. stubbs <technoexpressnet@gmail.com>"
   ],
+  "type": "commonjs",
   "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./module": "./index.mjs"
+  },
   "scripts": {
     "test": "mocha --recursive test/",
     "coverage": "npx nyc@latest --reporter json --reporter text mocha -R list test/*.js && npx codecov -f coverage/coverage-final.json",
-    "install": "node installer.js"
+    "install": "node installer.mjs"
   },
   "files": [
     "*.js",
     "*.md"
   ],
   "optionalDependencies": {
-    "node-wget-fetch": "^1.0.5",
+    "node-wget-fetch": "^1.1.0",
     "system-installer": "^1.1.5",
     "node-stream-zip": "^1.12.0",
     "fs-extra": "^9.0.1"
