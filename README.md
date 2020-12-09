@@ -15,11 +15,18 @@ This package differs from fork https://github.com/krocon/node-unpack-all in that
 ## Usage
 
 ```js
-var ua = require('all-unpacker');
+// CommonJS
+const ua = require('all-unpacker');
+const list = ua.list;
+const unpack = ua.unpack;
+
+//ESM Node JS v12+
+import  { list, unpack } from 'all-unpacker';
+
 // list only:
-ua.list(archiveFile<String>, options<Object>, callback<function>)
+list(archiveFile<String>, options<Object>, callback<function>)
 // unpack:
-ua.unpack(archiveFile<String>, options<Object>, callback<function>)
+unpack(archiveFile<String>, options<Object>, callback<function>)
 ```
 
 ### Examples
@@ -27,8 +34,14 @@ ua.unpack(archiveFile<String>, options<Object>, callback<function>)
 #### Example: unpack file
 
 ```js
-require('all-unpacker')
-.unpack('test/abc.rar', {
+// CommonJS
+const ua = require('all-unpacker');
+const unpack = ua.unpack;
+
+//ESM Node JS v12+
+import  { unpack } from 'all-unpacker';
+
+unpack('test/abc.rar', {
     targetDir: 'out'
 }, function(err, files, text) {
    if (err) return console.error(err);
