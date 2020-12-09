@@ -1,169 +1,189 @@
 'use strict';
-const expect = require('chai').expect,
-  unpackAll = require('../index.js'),
-  unpack = unpackAll.unpack,
-  list = unpackAll.list,
-  unpackOnly = unpackAll.unpackOnly;
+var expect = require('chai').expect;
+var unpack = require('../index.js').unpack;
+var list = require('../index.js').list;
+var unpackonly = require('../index.js').unpackonly;
 
-let archive = 'test/attr.7z';
-let archiveBlank = 'test/blank.zip';
-let options = {
-  targetDir: 'tmp',
-  indexes: [0],
-  forceOverwrite: true,
-  noDirectory: true,
-  quiet: false
-}
+var archive = 'test/attr.7z';
+var archiveBlank = 'test/blank.zip';
+var options = {
+        targetDir : 'tmp',
+        indexes : [0],
+        forceOverwrite: true,
+        noDirectory: true,
+        quiet: false
+    }
 
 describe('Method: `list`', function () {
-  it('should return an error on lsar error', function (done) {
-    list('??', options)
-      .catch((err) => {
-        expect(err).to.be.a('string');
-        done();
-      });
-  });
+    it('should return an error on lsar error', function (done) {
+        list('??', options, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });
 
-  it('should return an error on if missing source file', function (done) {
-    list(null, options)
-      .catch((err) => {
-        expect(err).to.be.a('string');
-        done();
-      });
-  });
+    it('should return an error on if missing source file', function (done) {
+        list(null, options, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });
 
-  it('should return an error on archive have no files', function (done) {
-    list(archiveBlank, options)
-      .catch((err) => {
-        expect(err).to.be.a('string');
-        done();
-      });
-  });
+    it('should return an error on archive have no files', function (done) {
+        list(archiveBlank, options, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });
 
-  it('should return list of files by index', function (done) {
-    list(archive, options)
-      .then((files) => {
-        expect(files[options.indexes]).to.be.a('string');
-        done();
-      });
-  });
+    it('should return an error on no callback function defined', function (done) {
+        var err = list(archiveBlank, options);
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+    });
 
-  it('should return list of files by index `options` null', function (done) {
-    list(archive, null)
-      .then((files) => {
-        expect(files[options.indexes]).to.be.a('string');
-        done();
-      });
-  });
+    it('should return list of files by index', function (done) {
+        list(archive, options, function (err, files, text) {
+            if (files) expect(files[options.indexes]).to.be.a('string');
+            done();
+        });
+    });
+
+    it('should return list of files by index `options` null', function (done) {
+        list(archive, null, function (err, files, text) {
+            if (files) expect(files[options.indexes]).to.be.a('string');
+            done();
+        });
+    });
 });
 
 describe('Method: `unpack`', function () {
-  it('should return an error on unar error', function (done) {
-    unpack('???', options)
-      .catch((err) => {
-        expect(err).to.be.a('string');
-        done();
-      });
-  });
+    it('should return an error on unar error', function (done) {
+        unpack('???', options, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });
 
-  it('should return an error on if missing source file', function (done) {
-    unpack(null, options)
-      .catch((err) => {
-        expect(err).to.be.a('string');
-        done();
-      });
-  });
+    it('should return an error on if missing source file', function (done) {
+        unpack(null, options, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });
 
-  it('should return an error on archive have no files or nothing extracted', function (done) {
-    unpack(archiveBlank, options)
-      .catch((err) => {
-        expect(err).to.be.a('string');
-        done();
-      });
-  });
+    it('should return an error on archive have no files or nothing extracted', function (done) {
+        unpack(archiveBlank, options, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });
 
-  it('should output each file extracted', function (done) {
-    unpack(archive, {
-      targetDir: 'tmp',
-      forceOverwrite: true,
-      noDirectory: true,
-      quiet: false
+    it('should return an error on no callback function defined', function (done) {
+        var err = unpack(archive, {
+        targetDir : 'tmp',
+        forceOverwrite: true,
+        noDirectory: true,
+        quiet: false
+        });
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
     })
-      .then((files) => {
-        expect(files).to.be.a('string');
-        done();
-      });
-  });
 
-  it('should output each file extracted `options` null', function (done) {
-    unpack(archive, null)
-      .then((files) => {
-        expect(files).to.be.a('string');
-        done();
-      });
-  });
+    it('should output each file extracted', function (done) {
+        unpack(archive, {
+        targetDir : 'tmp',
+        forceOverwrite: true,
+        noDirectory: true,
+        quiet: false
+    }, function (err, files, text) {
+            if (files) expect(files).to.be.a('string');
+            done();
+        });
+    });
 
-  it('should return output on fulfill', function (done) {
-    unpack(archive, {
-      targetDir: 'tmp',
-      forceOverwrite: true,
-      noDirectory: true,
-      quiet: false
-    })
-      .progress((text) => {
-        expect(text).to.be.a('string');
-        done();
-      });
-  });
+    it('should output each file extracted `options` null', function (done) {
+        unpack(archive, null, function (err, files, text) {
+            if (files) expect(files).to.be.a('string');
+            done();
+        });
+    });
 
-  it('should return output on fulfill `options` null', function (done) {
-    unpack(archive, null)
-      .progress((text) => {
-        expect(text).to.be.a('string');
-        done();
-      });
-  });
+    it('should return output on fulfill', function (done) {
+        unpack(archive, {
+        targetDir : 'tmp',
+        forceOverwrite: true,
+        noDirectory: true,
+        quiet: false
+    }, function (err, files, text) {
+            if (text) expect(text).to.be.a('string');
+            done();
+        });
+    });
+
+    it('should return output on fulfill `options` null', function (done) {
+        unpack(archive, null, function (err, files, text) {
+            if (text) expect(text).to.be.a('string');
+            done();
+        });
+    });
 });
 
-describe('Method: `unpack` only', function () {
-  it('should return an error on if missing file or directory to unpack from archive', function (done) {
-    unpack(archive, 'tmp', null)
-      .catch((err) => {
-        expect(err).to.be.a('string');
-        done();
-      });
-  });
+describe('Method: `unpackonly`', function () {
+    it('should return an error on if missing source file', function (done) {
+        unpackonly(null, 'tmp', ['normal file.txt','read-only file.txt'], function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });
 
-  it('should return an error on archive have no files or nothing extracted', function (done) {
-    unpack(archiveBlank, 'tmp', ['normal file.txt', 'read-only file.txt'])
-      .catch((err) => {
-        expect(err).to.be.a('string');
-        done();
-      });
-  });
+    it('should return an error on if missing target directory', function (done) {
+        unpackonly(archive, null, ['normal file.txt','read-only file.txt'], function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });
 
-  it('should not output any other file than what is supplied', function (done) {
-    unpack(archive, './tmp', ['normal file.txt', 'read-only file.txt'])
-      .then((files) => {
-        expect(files).to.not.contain('system file.txt');
-        expect(files).to.have.string('read-only file.txt');
-        expect(files).to.have.string('normal file.txt');
-        done();
-      }).catch((err) => {
-        console.log('------------------' + err);
-        expect(err).to.be.a('string');
-        done();
-      });
-  });
+    it('should return an error on if missing file or directory to unpack from archive', function (done) {
+        unpackonly(archive, 'tmp', null, function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });
 
-  it('should return output on progress', function (done) {
-    unpack(archive, 'tmp', 'read-only file.txt')
-      .progress((data) => {
-        console.log(data);
-        expect(data).to.be.a('string');
-        done();
-      }).catch((files) => {
-        console.log(files);
-      });
-  });
+    it('should return an error on archive have no files or nothing extracted', function (done) {
+        unpackonly(archiveBlank, 'tmp', ['normal file.txt','read-only file.txt'], function (err, files, text) {
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+        });
+    });
+
+    it('should return an error on no callback function defined', function (done) {
+        var err = unpackonly(archiveBlank, 'tmp', ['normal file.txt','read-only file.txt']);
+            if (err) expect(err).to.be.an.instanceof(Error);
+            done();
+    })
+
+    it('should not output any other file than what is supplied', function (done) {
+        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt'], function (err, files, text) {
+            if (files) expect(files).to.not.contain('system file.txt');
+            if (files) expect(files).to.have.string('read-only file.txt');
+            if (files) expect(files).to.have.string('normal file.txt');
+            done();
+        });
+    });
+
+    it('should return output on fulfill', function (done) {
+        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt','system file.txt'], function (err, files, text) {
+            if (text) expect(text).to.be.a('string');
+            done();
+        });
+    });
+
+    it('should return output on fulfill', function (done) {
+        unpackonly(archive, 'tmp', ['normal file.txt','read-only file.txt','system file.txt'], function (err, files, text) {
+            if (text) expect(text).to.be.a('string');
+            done();
+        });
+    });
 });
