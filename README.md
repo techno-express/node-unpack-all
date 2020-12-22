@@ -10,7 +10,7 @@ It allows you to unpack a lot of formats: zip, zipx, rar, 7z, tar, gzip, bzip2, 
 
 ## Installation
 
-This package differs from fork https://github.com/krocon/node-unpack-all in that the necessary cli tool lsar and unar, will be downloaded to package directory at install time. If your host is Linux your package manager will be used to install unar onto your system. For more info see [here](http://unarchiver.c3.cx/commandline).
+This package has been replaced with [node-unar](https://github.com/techno-express/node-unar).
 
 ## Usage
 

@@ -1,6 +1,6 @@
 {
   "name": "all-unpacker",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "All unpacker for zip, zipx, rar, 7z, tar, gzip, bzip2, lzma,... See theunarchiver.com for complete list, wrapper for unar and lsar.",
   "keywords": [
     "Unarchiver",
